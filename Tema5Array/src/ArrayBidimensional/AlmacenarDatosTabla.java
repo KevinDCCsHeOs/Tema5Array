@@ -114,4 +114,8 @@ public class AlmacenarDatosTabla {
 		}
 		return cad;
 	}
+	/*Diseñar un metodo que permita visualizar los datos de una matriz llamada matriz2 que almacena valore constantes, debera de imprimir la matriz original
+	 * y la matriz con los datos ordenados
+	 */
+	
 }

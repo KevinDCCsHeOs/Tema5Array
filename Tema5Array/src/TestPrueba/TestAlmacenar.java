@@ -1,10 +1,10 @@
 package TestPrueba;
 
 import javax.swing.JOptionPane;
-import ArrayUnidimen.AlmacenarDatos;
+import ArrayBidimensional.*;
+import ArrayUnidimen.*;
 import EntradaSalida.Tools;
 import java.util.Random;
-import ArrayBidimensional.AlmacenarDatosTabla;
 
 public class TestAlmacenar {
 	public static String Boton(String menu) {
@@ -69,7 +69,7 @@ public class TestAlmacenar {
 		}while(!sel.equalsIgnoreCase("Salir"));
 	}
 	public static void main(String[] args) {
-		BuscaMenu("Primer Menu,Segundo Menu,Tercer Menu,Salir");
+		BuscaMenu("Primer Menu,Segundo Menu,Tercer Menu,Cuarto Menu,Menu IMC,Salir");
 	}
 	public static void BuscaMenu(String menu) {
 		String sel="";
@@ -84,6 +84,12 @@ public class TestAlmacenar {
 				break;
 			case "Tercer Menu":
 				MenuArrayMatriz("Aleatorio,Leer Filas,Leer Columnas,Suma Diagonal,Array Octal,Triangulo superior,Triangulo inferior,Imprimir,Salir");
+				break;
+			case "Cuarto Menu":
+				MenuObjetos("Leer,Ordena,Imprimir,Salir");
+				break;
+			case "Menu IMC":
+				MenuIMC("Capturar datos,Ordenar por nombre,Estadisticas,Consulta individual,Salir");
 				break;
 			case "Salir":
 			}
@@ -179,6 +185,63 @@ public class TestAlmacenar {
 					else Tools.imprimePantalla("Datos almacenados:\n"+mat.verMatriz());
 					break;
 				case "Salir":
+			}
+		}while(!sel.equalsIgnoreCase("Salir"));
+	}
+	public static void MenuObjetos(String menu) {
+		String sel="";
+		ArrayObjetos objetos=new ArrayObjetos(Tools.leerByte("Tamaño del arreglo"));
+		do {
+			sel=Desplegable(menu);
+			switch(sel) {
+				case "Leer":
+					objetos.insertaObjetoLectura();
+					Tools.imprimePantalla("Datos almacenados:\n"+objetos.imprimeDatosArray());
+					break;
+				case "Ordena":
+					objetos.ordenaBurbuja();
+					Tools.imprimePantalla("Datos almacenados:\n"+objetos.imprimeDatosArray());
+					break;
+				case "Imprimir":
+					if(objetos.arrayVacio()) Tools.salidaError("Array vacio... leer datos");
+					else Tools.imprimePantalla("Datos almacenados:\n"+objetos.imprimeDatosArray());
+					break;
+				case "Salir":
+			}
+		}while(!sel.equalsIgnoreCase("Salir"));
+	}
+	public static void MenuIMC(String menu) {
+		String sel="";
+		ArrayObjetosIMC objetos=new ArrayObjetosIMC(Tools.leerByte("Tamaño del arreglo a capturar: "));
+		do {
+			sel=Desplegable(menu);
+			switch(sel) {
+			case "Capturar datos":
+				objetos.insertaObjetoLectura();
+				Tools.imprimePantalla("Datos Capturados: \n\n"+objetos.imprimeDatosArray());
+				break;
+			case "Ordenar por nombre":
+				if(objetos.arrayVacio())
+					Tools.salidaError("Arreglo vacio, Inserta datos en Captura datos");
+				else {
+					objetos.ordenaBurbuja();
+					Tools.imprimePantalla("Datos Capturados: \n\n"+objetos.imprimeDatosArray());
+				}
+				break;
+			case "Estadisticas":
+				if(objetos.arrayVacio())
+					Tools.salidaError("Arreglo vacio, Inserta datos en Captura datos");
+				else {
+					Tools.imprimePantalla("Datos Capturados: \n\n"+objetos.imprimeDatosArray()+"\n\n"+objetos.Estadisticas());
+				}
+				break;
+			case "Consulta individual":
+				if(objetos.arrayVacio())
+					Tools.salidaError("Arreglo vacio, Inserta datos en Captura datos");
+				else 
+					objetos.buscarDato();
+				break;
+			case "Salir":
 			}
 		}while(!sel.equalsIgnoreCase("Salir"));
 	}
